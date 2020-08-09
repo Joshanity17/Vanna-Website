@@ -1,0 +1,13 @@
+#videoComponent {
+    display: flex;
+    height: 100%;
+    width: 100%;
+
+    .videoPlayer {
+        height: 100vh;
+    }
+
+    ::ng-deep div[hidden] {
+        display: none;
+    }
+}
