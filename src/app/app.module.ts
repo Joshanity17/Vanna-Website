@@ -6,6 +6,7 @@ import { SwiperModule } from 'ngx-swiper-wrapper';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { VideoComponent } from './video/video.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { VideoComponent } from './video/video.component';
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
-    SwiperModule
+    SwiperModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
