@@ -1,10 +1,10 @@
 <div id="videoComponent">
     <div id="videoContainer">
-        <swiper [config]="swiperConfig" [(index)]="swiperIndex" (indexChange)="indexChange($event)">
+        <swiper [config]="swiperConfig" [(index)]="swiperIndex" (indexChange)="activeVideo($event)"
+            (slideChange)="swiperSlideChange($event)">
             <ng-container *ngFor="let video of videoSource; let currentIndex = index;">
                 <video id="{{video.name + video.id}}" *ngIf="currentIndex <= swiperIndex || 
-                    currentIndex === swiperIndex + 1 || video.hasBeenLoaded" class="videoPlayer" preload="metadata"
-                    autoplay loop>
+                currentIndex === swiperIndex + 1 || video.hasBeenLoaded" class="videoPlayer" loop muted>
                     <source src="{{video.path}}" type="video/mp4">
                 </video>
             </ng-container>
