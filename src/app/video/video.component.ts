@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { VideoService } from 'src/app/shared/service/video.service';
 import { Video } from '../shared/model/Video.model';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
@@ -23,14 +23,13 @@ export class VideoComponent implements OnInit {
     this.videoSource = await this.videoService.getAllVideo();
   }
 
-  indexChange(index) {
-    this.activeVideo(index)
+  swiperSlideChange(data) {
+    const videoPlayer: any = this.videoSource[data.previousIndex].getVideoPlayer();
+    videoPlayer.pause();
   }
 
   activeVideo(index: number) {
-    const current = this.videoSource[index];
-    const selector = current.name + current.id;
-    const videoPlayer: any = document.getElementById(selector);
+    const videoPlayer: any = this.videoSource[index].getVideoPlayer();
     this.videoSource[index].hasBeenLoaded = true;
     videoPlayer.currentTime = 0;
     videoPlayer.play();
