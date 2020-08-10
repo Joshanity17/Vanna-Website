@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { VideoService } from 'src/app/shared/service/video.service';
 import { Video } from '../shared/model/Video.model';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
+import { faEye, IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-video',
@@ -17,6 +19,7 @@ export class VideoComponent implements OnInit {
     navigation: false
   };
   public swiperIndex: number = 0;
+  public faEye: IconDefinition = faEye;
   constructor(private videoService: VideoService) { }
 
   async ngOnInit() {
@@ -29,10 +32,17 @@ export class VideoComponent implements OnInit {
   }
 
   activeVideo(index: number) {
+    const video: Video = this.videoSource[index];
     const videoPlayer: any = this.videoSource[index].getVideoPlayer();
-    this.videoSource[index].hasBeenLoaded = true;
+    video.hasBeenLoaded = true;
     videoPlayer.currentTime = 0;
     videoPlayer.play();
+    video.viewCount = this.videoService.getVideoViewCount(video.id);
+
+    if (!video.hasBeenViewed && !videoPlayer.paused) {
+      video.hasBeenViewed = true;
+      this.videoService.viewVideo(video.id);
+    }
   }
 
 }
