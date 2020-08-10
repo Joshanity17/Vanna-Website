@@ -14,4 +14,9 @@ export class Video {
         this.viewCount = 0;
         this.viewHistory = [];
     }
+
+    getVideoPlayer() {
+        const selector = this.name + this.id;
+        return document.getElementById(selector);
+    }
 }
