@@ -40,4 +40,14 @@ export class VideoService {
       }
     }).pipe(map((data) => <number>data['viewCount']));
   }
+
+  public async logViewStatistic(id: number, time: number, complete: boolean): Promise<void> {
+    const serviceURL: string = this.apiURL + 'logViewStatistic';
+    const videoData: any = await this.http.put(serviceURL, {
+      id: id,
+      time: time,
+      complete: complete
+    }).toPromise();
+    return videoData;
+  }
 }
