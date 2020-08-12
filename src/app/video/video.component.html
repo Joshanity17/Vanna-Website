@@ -1,19 +1,24 @@
 <div id="videoComponent">
     <div id="videoContainer">
         <swiper [config]="swiperConfig" [(index)]="swiperIndex" (indexChange)="activeVideo($event)"
-            (slideChange)="swiperSlideChange($event)" (init)="activeVideo($event)">
-            <div *ngFor="let video of videoSource; let currentIndex = index;">
-                <video id="{{video.name + video.id}}" *ngIf="currentIndex <= swiperIndex || 
-                currentIndex === swiperIndex + 1 || video.hasBeenLoaded" class="videoPlayer" loop muted>
-                    <source src="{{video.path}}" type="video/mp4">
-                </video>
-                <div class="stats-bar">
-                    <div class="stat-item">
-                        <fa-icon [icon]="faEye"></fa-icon>
-                        {{video.viewCount | async}}
+            (slideChange)="swiperSlideChange($event)">
+            <ng-container *ngFor="let video of videoSource; let currentIndex = index;">
+                <div *ngIf="currentIndex <= swiperIndex || currentIndex === swiperIndex + 1 || video.hasBeenLoaded">
+                    <div class="vineContainer">
+                        <video id="{{video.name + video.id}}" class="videoPlayer" muted (onended)="video.videoEnded()">
+                            <source src="{{video.path}}" type="video/mp4">
+                        </video>
+                        <div class="stats-bar">
+                            <div class="stat-item">
+                                <fa-icon [icon]="faEye"></fa-icon>
+                                {{video.viewCount | async}}
+                            </div>
+                        </div>
                     </div>
+
                 </div>
-            </div>
+            </ng-container>
+
         </swiper>
     </div>
 </div>

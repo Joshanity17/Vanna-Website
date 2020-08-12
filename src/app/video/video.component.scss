@@ -14,6 +14,18 @@
     ::ng-deep .swiper-slide {
         width: 100vw;
         overflow: hidden;
+        display: flex;
+        justify-content: center;
+    }
+
+    .vineContainer {
+        width: 485px;
+        max-width: 485px;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        background: black;
     }
 
     .stats-bar {
