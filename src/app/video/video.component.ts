@@ -63,11 +63,12 @@ export class VideoComponent implements OnInit, AfterViewInit {
     video.hasBeenLoaded = true;
     videoPlayer.currentTime = 0;
     videoPlayer.play();
-    video.viewCount = this.videoService.getVideoViewCount(video.id);
 
     if (!video.hasBeenViewed && !videoPlayer.paused) {
       video.hasBeenViewed = true;
-      this.videoService.viewVideo(video.id);
+      this.videoService.viewVideo(video.id).then(() => {
+        video.viewCount = this.videoService.getVideoViewCount(video.id);
+      })
     }
   }
 
