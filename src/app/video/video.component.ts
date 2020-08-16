@@ -33,11 +33,10 @@ export class VideoComponent implements OnInit, AfterViewInit {
   swiperSlideChange(data) {
     const video: Video = this.videoSource[data.previousIndex];
     const videoPlayer: any = video.getVideoPlayer();
-    if (!videoPlayer.paused) {
-      console.log(videoPlayer.currentTime);
-      videoPlayer.pause();
-    }
-    if (video.hasBeenViewed) {
+
+    if (!videoPlayer.paused) videoPlayer.pause();
+
+    if (video.hasBeenViewed)
       this.videoService.logViewStatistic(
         video.id,
         (video.hasBeenEnded) ? videoPlayer.duration : videoPlayer.currentTime,
