@@ -43,7 +43,15 @@ export class VideoComponent implements OnInit, AfterViewInit {
         (video.hasBeenEnded) ? videoPlayer.duration : videoPlayer.currentTime,
         !!video.hasBeenEnded
       );
-    }
+
+  }
+
+  clickFunction() {
+    const video: Video = this.videoSource[this.swiperIndex];
+    const videoPlayer: any = video.getVideoPlayer();
+
+    (videoPlayer.paused) ? this.activeVideo(this.swiperIndex) : videoPlayer.pause();
+
   }
 
   activeVideo(index: number) {

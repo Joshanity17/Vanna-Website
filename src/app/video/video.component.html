@@ -1,7 +1,7 @@
 <div id="videoComponent">
     <div id="videoContainer">
         <swiper [config]="swiperConfig" [(index)]="swiperIndex" (indexChange)="activeVideo($event)"
-            (slideChange)="swiperSlideChange($event)">
+            (slideChange)="swiperSlideChange($event)" (click)="clickFunction()">
             <ng-container *ngFor="let video of videoSource; let currentIndex = index;">
                 <div *ngIf="currentIndex <= swiperIndex || currentIndex === swiperIndex + 1 || video.hasBeenLoaded">
                     <div class="vineContainer">
@@ -18,7 +18,6 @@
 
                 </div>
             </ng-container>
-
         </swiper>
     </div>
 </div>
